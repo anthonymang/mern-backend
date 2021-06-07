@@ -100,6 +100,16 @@ const login = async (req, res) => {
    
 }
 
+const profile = async (req, res) => {
+    console.log('Inside of PROFILE route')
+    const {id, name, email} = req.user
+    res.json({
+        id: id,
+        name: name,
+        email: email
+    })
+}
+
 // routes
 router.get('/test', test);
 
@@ -110,8 +120,8 @@ router.post('/signup', signup)
 // POST api/users/login (Public)
 router.post('/login', login);
 
-// GET api/users/current (Private)
-// router.get('/profile', passport.authenticate('jwt', { session: false }), profile);
+// GET api/users/profile (Private)
+router.get('/profile', passport.authenticate('jwt', { session: false }), profile);
 // router.get('/all-users', fetchUsers);
 
 module.exports = router; 
